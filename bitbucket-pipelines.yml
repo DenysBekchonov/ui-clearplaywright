@@ -1,0 +1,14 @@
+pipelines:
+  default:
+    - step:
+        name: Run Playwright Tests
+        image: mcr.microsoft.com/playwright:focal
+        caches:
+          - node
+        script:
+          - npm ci
+          - npx playwright install
+          - npx playwright test
+          - npx allure generate allure-results --clean -o allure-report
+        artifacts:
+          - allure-report/**
