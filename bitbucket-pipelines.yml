@@ -12,6 +12,11 @@ pipelines:
           - npm ci
           - npx playwright install
           - npx playwright test
-          - npx allure generate allure-results --clean -o allure-report
+          - npx allure generate allure-results --clean -o docs
+          - git config --global user.email "ci@bitbucket.org"
+          - git config --global user.name "Bitbucket CI"
+          - git add docs
+          - git commit -m "Update Allure report"
+          - git push origin HEAD
         artifacts:
-          - allure-report/**
+          - docs/**
