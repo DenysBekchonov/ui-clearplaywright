@@ -6,6 +6,9 @@ pipelines:
         caches:
           - node
         script:
+          - apt-get update && apt-get install -y openjdk-11-jdk
+          - export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+          - export PATH=$JAVA_HOME/bin:$PATH
           - npm ci
           - npx playwright install
           - npx playwright test
